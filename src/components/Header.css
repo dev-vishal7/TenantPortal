@@ -1,0 +1,71 @@
+/* General styles for the header */
+.header {
+  background-color: #ffffff;
+  color: #333333;
+  padding: 10px 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  color: #333333; /* Dark text color */
+}
+
+.header-logout {
+  display: flex;
+  align-items: center;
+}
+
+.header-logout-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.header-logout-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
+}
+
+.header-logout-icon {
+  color: #333333;
+  transition: color 0.3s ease;
+}
+
+.header-logout-btn:hover .header-logout-icon {
+  color: #555555;
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 20px;
+  }
+
+  .header-title {
+    font-size: 1.4rem;
+  }
+
+  .header-logout-btn {
+    padding: 0;
+  }
+}

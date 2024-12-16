@@ -1,0 +1,101 @@
+/* Main card container */
+.app-card {
+  position: relative;
+  width: calc(50% - 50px); /* Two cards per row, 20px gap between */
+  margin: 10px; /* Adds some spacing */
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px; /* Slightly rounded corners for smoother edges */
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Subtle shadow for a refined look */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.app-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Elevated hover effect */
+}
+
+/* Image container */
+.app-card-image-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.app-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the container without distortion */
+}
+
+/* Title in the top left corner with shadow */
+.app-card-title {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 1.6rem; /* Slightly larger font for better readability */
+  font-weight: bold;
+  color: white;
+  text-transform: capitalize;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7); /* Enhanced shadow for better contrast */
+  margin: 0;
+  padding: 0;
+  z-index: 2; /* Ensures the title is above other content */
+}
+
+/* Soft black gradient overlay at the bottom half of the card */
+.app-card-gradient {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(0, 0, 0, 0.6) 100%
+  ); /* Transparent to soft black gradient */
+  padding: 20px;
+  border-radius: 0 0 12px 12px;
+}
+
+/* Button styles */
+.app-card-button {
+  background-color: #444; /* Dark gray for a softer button look */
+  color: white;
+  border: none;
+  padding: 12px 24px; /* Slightly bigger padding for a better button size */
+  border-radius: 30px; /* Rounded button for a modern appearance */
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.app-card-button:hover {
+  background-color: #333; /* Darker hover effect for the button */
+  transform: scale(1.05); /* Subtle zoom effect */
+}
+
+.app-card-button:active {
+  background-color: #222; /* Even darker on click */
+  transform: scale(1); /* Reset zoom on click */
+}
+
+/* Container for app cards */
+.app-card-container {
+  display: flex;
+  flex-wrap: wrap; /* Allows cards to wrap onto the next row */
+  justify-content: center; /* Center-aligns cards horizontally */
+  gap: 20px; /* Adds spacing between cards */
+  margin: 20px auto;
+  max-width: 1200px; /* Restricts the width of the container */
+  padding: 0 20px; /* Adds some padding for smaller screens */
+}
+
+/* Responsive design for card layout */
+@media (max-width: 768px) {
+  .app-card {
+    width: 90%; /* Cards take full width with margins */
+    margin: 10px auto;
+  }
+}
