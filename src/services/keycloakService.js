@@ -1,36 +1,32 @@
 import Keycloak from "keycloak-js";
 
 const keycloakConfig = {
-  realm: "wyoxafp",
-  url: "http://127.0.0.1:8080",
-  clientId: "spectra-frontend",
+  realm: window.location.hostname.split(".")[0],
+  url: import.meta.env.VITE_KEYCLOAK_URL,
+  clientId: "starlly_frontend",
   publicClient: true,
   initOptions: {
     onLoad: "check-sso",
     silentCheckSsoRedirectUri:
       window.location.origin + "/silent-check-sso.html",
     pkceMethod: "S256",
-    responseType: "code", // Add this
+    responseType: "code",
     flow: "standard",
     checkLoginIframe: false,
-    scope: "openid profile email", // Add this
+    scope: "openid profile email",
   },
 };
-
-const keycloak = new Keycloak(keycloakConfig);
-
 class KeycloakService {
   constructor() {
     this.keycloak = null;
-    this.realm = "wyoxafp"; // Store the dynamic realm name
+    this.realm = window.location.hostname.split(".")[0];
   }
 
-  // Initialize Keycloak
   initKeycloak = () => {
     // Update the Keycloak configuration with the dynamic realm
     const dynamicKeycloakConfig = {
       ...keycloakConfig,
-      realm: this.realm, // Set the dynamic realm
+      realm: this.realm,
     };
 
     this.keycloak = new Keycloak(dynamicKeycloakConfig);
@@ -38,8 +34,6 @@ class KeycloakService {
     return this.keycloak
       .init(dynamicKeycloakConfig.initOptions)
       .then((authenticated) => {
-        console.log("authenticated", authenticated);
-        // if (!authenticated) this.doLogin();
         return authenticated;
       })
       .catch((error) => {
@@ -53,7 +47,7 @@ class KeycloakService {
 
     // Fetch app list from Keycloak
     const response = await fetch(
-      `http://127.0.0.1:8080/admin/realms/${this.realm}/clients`,
+      `${import.meta.env.VITE_KEYCLOAK_URL}/admin/realms/${this.realm}/clients`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -76,22 +70,26 @@ class KeycloakService {
 
   // Fetch admin token
   validateDomain = async () => {
-    const payload = {
-      realm: "wyoxafp",
-    };
-    const response = await fetch(
-      `http://localhost:8085/api/v2/validateDomain`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      }
-    );
+    try {
+      const payload = {
+        realm: this.realm,
+      };
+      const response = await fetch(
+        `${import.meta.env.VITE_BASE_URL}/api/v2/validateDomain`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
 
-    const data = await response.json();
-    return data;
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return false;
+    }
   };
 
   // Login function

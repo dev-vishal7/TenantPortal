@@ -98,4 +98,7 @@
     width: 90%; /* Cards take full width with margins */
     margin: 10px auto;
   }
+  .app-card-gradient {
+    width: 90%;
+  }
 }

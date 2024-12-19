@@ -1,7 +1,7 @@
 import React from "react";
 import "./AppCard.css"; // Import the CSS file
 
-const AppCard = ({ appName, onContinue, imageUrl }) => {
+const AppCard = ({ appName, onContinue, imageUrl, appUrl }) => {
   return (
     <div className="app-card">
       <div className="app-card-image-container">
@@ -10,7 +10,10 @@ const AppCard = ({ appName, onContinue, imageUrl }) => {
       <h2 className="app-card-title">{appName}</h2>{" "}
       {/* Title in top left corner */}
       <div className="app-card-gradient">
-        <button className="app-card-button" onClick={onContinue}>
+        <button
+          className="app-card-button"
+          onClick={onContinue.bind(this, appUrl)}
+        >
           Continue
         </button>
       </div>

@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import AppCard from "../components/AppCard";
 import keycloakService from "../services/keycloakService";
 
-const LandingPage = () => {
+export const LandingPage = () => {
   const [apps, setApps] = useState([
     {
       id: 1,
@@ -22,22 +22,6 @@ const LandingPage = () => {
   ]);
 
   const tenantName = "Tenant Name";
-
-  useEffect(() => {
-    const loadApps = async () => {
-      try {
-        if (!keycloakService.isLoggedIn()) {
-          const isValid = await keycloakService.validateDomain();
-          if (isValid) {
-            keycloakService.doLogin();
-          }
-        }
-      } catch (error) {
-        console.error("Error during Keycloak login process:", error);
-      }
-    };
-    loadApps();
-  }, []);
 
   const handleAppContinue = (appUrl) => {
     window.location.href = appUrl;
@@ -71,5 +55,3 @@ const LandingPage = () => {
     </div>
   );
 };
-
-export default LandingPage;
